@@ -44,7 +44,7 @@ CPA 样本（见 CPA Ch1 chapter-01.md L26-30）：
 ## 变体
 - 公式密集型（理科/财务）：Definition 里放公式块，"用通俗的话说"解释每个变量和适用条件
 - 双语源（中文学外文知识）：Definition 给原文拼写+中文翻译双讲
-- blueprint 路线：可以在 Definition 后加"回源：P7-a L886-930"行内行号（human-readable 不加）
+- blueprint 路线：可以在 Definition 后加"回源：P7-a L886-930"行内行号（human 不加）
 
 ## 不要这样用
 - 把案例/例子放在 Definition 里：案例放在 narrative 正文或 worked-example

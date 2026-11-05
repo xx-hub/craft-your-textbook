@@ -9,7 +9,14 @@
     python strip_meta_sections.py [目录1] [目录2] ...
     # 默认递归扫描 chapters/ 和 appendix/
 
-★ 删完后必须重跑 merge_book.py 重新合并 BOOK.md。
+⛔ **拼好的章正文（`chapters/chapter-<NN>.md`）在有分片时不拆**（票 `skill-release-ready/09`
+走查抓到的真丢稿）：脚手架是**每个写作单元**写在**它那一片的末尾**的，所以拼好之后片 1 的脚手架
+落在章正文的**中间**——本脚本按「标题到文件末尾」截断，一截就把片 2 之后的全部正文**静默删掉**。
+正确的落点是**分片**（每一片的脚手架都在它自己的末尾，截断不会伤到别人的正文），拆完重跑
+`assemble_chapter.py` 重拼即可。没有分片的老书（直接写 `chapters/chapter-<NN>.md`）不受影响：
+那时章正文自己就是写作单元，照旧截断。
+
+★ 删完后必须重跑 assemble_chapter.py 重拼章正文，再跑 merge_book.py 重新合并 BOOK.md。
 """
 import re
 import sys
@@ -22,6 +29,44 @@ if sys.stderr and hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8")
 
 DEFAULT_DIRS = ["chapters", "appendix"]
+
+# ⚠️ 分片是**写作单元**，章节正文是从它拼出来的**派生件**（票 `skill-release-ready/09`）：
+# 脚手架写在每片末尾 ⇒ 拼好之后它落在章正文中间，截断章正文会丢掉后半章。所以有分片时只拆分片。
+SHARD_DIR_PARTS = ("chapters", "shards")
+
+
+def is_shard(path):
+    """`chapters/shards/` 下的任何 `.md` 都算分片（与 `assemble_chapter.py` 同一个判定口径）。"""
+    parts = path.parts
+    for index in range(len(parts) - len(SHARD_DIR_PARTS) + 1):
+        if parts[index:index + len(SHARD_DIR_PARTS)] == SHARD_DIR_PARTS:
+            return True
+    return False
+
+
+def assembled_chapters_with_shards(base_dir, dirs):
+    """有分片的那几章：它们的章正文是派生件，不许在这里截断。返回章正文路径的集合。
+
+    ⚠️ 返回的键与主循环里 `rglob` 吐出来的**同一个基准**（票 09 收口 review 抓到的第二个漏网：
+    原先这里用 `Path(".") / dirname`，而主循环用 `Path(base_dir) / dirname`——`dirs=('.')`
+    时两边拼出来的字符串不同，`f in derived` 恒假、guard 静默失效，照旧截断派生件）。
+    所以两边都走 `resolved()`，并且**只收直属层的章正文**（`chapters/chapter-<NN>.md`）。
+    """
+    derived = set()
+    for dirname in dirs:
+        d = (Path(base_dir) / dirname).resolve()
+        if not d.exists():
+            continue
+        for f in d.rglob("*.md"):
+            if not is_shard(f):
+                continue
+            m = re.match(r"^chapter-(\d+)-\d+\.md$", f.name)
+            if m:
+                # ⚠️ 章号**零填充成两位**再拼：`assemble_chapter.py` 认一位数字的分片号，
+                # 但写出来的章正文永远是 `chapter-01.md`。分片在 `<章目录>/shards/` 下，
+                # 章正文在它的**上一层**（`f.parent.parent`），两边都 resolve 到同一基准。
+                derived.add((f.parent.parent / f"chapter-{int(m.group(1)):02d}.md").resolve())
+    return derived
 
 
 def read_scaffold_titles(base_dir):
@@ -71,7 +116,26 @@ def process_file(path, markers):
     return len(removed)
 
 
+HELP = """拆脚手架脚本：删掉每个写作单元末尾的「脚手架」板块（自检清单/版本记录/写作笔记等）。
+
+用法：
+    python strip_meta_sections.py [目录1] [目录2] ...
+    # 默认递归扫描 chapters/ 和 appendix/
+
+- 拆**分片**（chapters/shards/chapter-<NN>-<MM>.md）那一层：脚手架写在每片末尾，截断它不伤别人的正文。
+- 有分片时**跳过**拼好的 chapters/chapter-<NN>.md（派生件）——在它上面按标题截断会把后面几片删掉。
+- 拆完重跑 assemble_chapter.py 重拼，再跑 merge_book.py 重新合并。
+
+⛔ `--help` 只印这份用法，不动盘上任何文件。
+"""
+
+
 def main():
+    # `--help` 只印用法、一个字节都不写（票 `skill-release-ready/09` 走查实测：它原先把 `--help`
+    # 当成一个目录名，印完「目录不存在」就退出 0——退出码看着没事，用法一个字没有）。
+    if "-h" in sys.argv[1:] or "--help" in sys.argv[1:]:
+        print(HELP, end="")
+        return
     args = sys.argv[1:]
     dirs = args if args else DEFAULT_DIRS
     base_dir = "."
@@ -81,6 +145,7 @@ def main():
 
     total_removed = 0
     files_changed = 0
+    derived = assembled_chapters_with_shards(base_dir, dirs)
 
     for dirname in dirs:
         d = Path(base_dir) / dirname
@@ -88,6 +153,15 @@ def main():
             print(f"[skip] 目录不存在：{d}")
             continue
         for f in sorted(d.rglob("*.md")):
+            # `META.md` 是**声明面**、`BOOK.md` 是**合并成品**，都不是章也不是片
+            # （票 09 收口 review 实测：`dirs=('.')` 时两个都会被当普通 md 截断——声明面截了
+            # 之后这趟跑完就读不到脚手架标题，成品书截了等于交一本被砍掉尾部的书）。
+            if f.name in ("META.md", "BOOK.md"):
+                print(f"[skip] {f}: 声明面/合并成品，不是章也不是分片（见文件头）")
+                continue
+            if f.resolve() in derived:
+                print(f"[skip] {f}: 这一章有分片，章正文是派生件——拆它的分片、重拼（见文件头）")
+                continue
             removed = process_file(f, markers)
             if removed > 0:
                 lines = f.read_text(encoding="utf-8").count("\n")
@@ -99,7 +173,7 @@ def main():
 
     print("-" * 60)
     print(f"完成：{files_changed} 个文件，共删除 {total_removed:,} 字符")
-    print("★ 记得重跑 merge_book.py 重新合并 BOOK.md")
+    print("★ 记得重跑 assemble_chapter.py 重拼章正文，再跑 merge_book.py 重新合并 BOOK.md")
 
 
 if __name__ == "__main__":

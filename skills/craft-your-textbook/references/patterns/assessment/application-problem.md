@@ -37,7 +37,7 @@ Hint
 ## 变体
 - **理科版**：推导题、证明题——Answer 展示完整推导步骤
 - **编程版**：系统设计/debug 题——Answer 展示思考路径+代码
-- **human-readable**：章末"思考题/讨论题"
+- **human**：章末"思考题/讨论题"
 
 ## 不要这样用
 - ❌ 把 application-problem 拆成多个 quick-judgment——它的价值在推理链完整性

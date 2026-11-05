@@ -38,7 +38,7 @@
 
 ## 变体
 - **blueprint 路线**：🎯弹药库板块里用表格；音标用英式 RP
-- **human-readable 路线**：词汇融入叙事，章末附词汇表
+- **human 路线**：词汇融入叙事，章末附词汇表
 
 ## 不要这样用
 - ❌ 非语言类用这个卡——术语管理是 precise-definition + deterministic-anchor 的职责

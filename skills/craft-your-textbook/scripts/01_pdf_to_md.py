@@ -33,14 +33,10 @@ import time
 import zipfile
 from pathlib import Path
 
-try:
-    import requests
-except ImportError:
-    sys.exit(
-        "✗ 缺少 requests 库。请先安装：\n"
-        "    pip install requests\n"
-        "  （或 pip install -r scripts/requirements.txt）"
-    )
+# ⚠️ 依赖检查**推迟到真跑的时候**（票 `skill-release-ready/09` 收口 review 抓到的）：
+# 原先它在模块顶层就 `import requests`、缺库直接 `sys.exit(1)`，于是**没装依赖的机器上
+# `--help` 也退出 1**——而 `--help` 恰好是这些人最需要的那条命令。缺库的提示改在
+# `require_requests()` 里，`--help` 走不到它。
 
 # Windows 控制台默认 GBK，强制 UTF-8 输出，避免 emoji/中文 print 崩溃
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
@@ -143,9 +139,44 @@ def step4_download_and_unzip(zip_url, output_dir):
         print(f"  已解压 {len(names)} 个文件到: {output_dir}")
 
 
+HELP = """PDF → Markdown（MinerU 在线 API）。
+
+用法:
+    export MINERU_TOKEN="..."
+    python 01_pdf_to_md.py <输入PDF路径> <输出目录>
+
+- 需要环境变量 MINERU_TOKEN（缺了会明确报错并退出，不是静默失败）。
+- 只依赖 requests（pip install -r requirements.txt）。
+- 已有 MD 的源可跳过本步（SKILL.md「Phase 1 前置」）。
+- 理科材料把顶部 ENABLE_FORMULA 改成 True。
+
+⛔ `--help` 只印这份用法、一个字节都不写、退出码 0。
+"""
+
+
+def require_requests():
+    """真跑之前才要 requests：缺库时给一条能照做的提示，⛔ 不是裸 ImportError。"""
+    try:
+        import requests
+    except ImportError:
+        sys.exit(
+            "✗ 缺少 requests 库。请先安装：\n"
+            "    pip install requests\n"
+            "  （或 pip install -r scripts/requirements.txt）"
+        )
+    globals()["requests"] = requests
+
+
 def main():
+    # `--help` 单独处理（票 `skill-release-ready/09` 走查实测：它原先落进下面那条 usage 分支、
+    # 以退出码 1 打印——而 `scripts/README.md` 承诺「任意脚本 --help 只印用法」。用法是印出来了，
+    # 但一个「我想看看怎么用」的请求不该带非零退出码）。
+    if "-h" in sys.argv[1:] or "--help" in sys.argv[1:]:
+        print(HELP, end="")
+        return 0
     if len(sys.argv) < 3:
         sys.exit("用法: python 01_pdf_to_md.py <输入PDF路径> <输出目录>")
+    require_requests()
     pdf_path = sys.argv[1]
     output_dir = Path(sys.argv[2])
     if not os.path.isfile(pdf_path):
@@ -167,4 +198,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

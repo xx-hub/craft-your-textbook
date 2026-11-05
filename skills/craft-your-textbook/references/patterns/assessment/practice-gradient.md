@@ -22,6 +22,13 @@ CPA Ch1 章末（三级梯度的典型）：
 [2 道讨论题，没有唯一答案，考批判性思考]
 ```
 
+> ⚠️ **这些英文块名只属于 blueprint 档「带读手册」内部**：它们住在章末 H2 教学区里、
+> 带读手册四个子项之二的「三档题与提示分级」下面。human 档的教学区**零改动**——原样保留
+> 本书自己的三层问题链（如「回忆层／迁移层／开放层」），⛔ 不套用本卡的英文块名。
+> 正文（教学区之前）是给人读的散文，⛔ 不出现 `Concept Check`／`Think Deeper` 这类「短行＋冒号」
+> 块头；本书板块表声明的是中文名时，手册内部也用本书声明的名字。契约的 H2 那一份：
+> 本仓 dsh＝`resources/references/invariants.md`／skill 侧＝`references/invariants.md`；「带读手册」见 `file-contracts.md`。
+
 PMP 章末（二级梯度，认证类不需要开放讨论）：
 ```markdown
 ### 探索脚本：引导式问题链  ← recall+transfer

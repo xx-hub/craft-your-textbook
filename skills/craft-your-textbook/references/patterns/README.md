@@ -7,24 +7,24 @@
 
 ## 什么时候读我
 
-- **Phase 3.3 模式选型时**：全读本 README + 按教学问题翻对应卡
-- **Phase 4/5 写章时**：按 style-spec 里选定的卡，重读具体卡的写法示例
+- **设计期第 3 步·模式选型时**：全读本 README + 按教学问题翻对应卡
+- **铺章时**：按写作规范里选定的卡，重读具体卡的写法示例
 
 ## 卡的分层
 
-- **整书架构层**（`structure/`）：设计 OUTLINE 时先翻这组——地基章、收网章、跨章引用、附录汇编、多源裁决、主题低音线
+- **整书架构层**（`structure/`）：设计章节骨架时先翻这组——地基章、收网章、跨章引用、附录汇编、多源裁决、主题低音线
 - **章内板块层**（其他目录）：设计章内板块语法时翻
-  - `concept-anchoring/`：概念锚定类（精确呈现、误区桩、苏格拉底提问、事实vs判断分离、**深度铺陈（depth-elaboration）**）
+  - `concept-anchoring/`：概念锚定类（精确呈现、误区桩、苏格拉底提问、事实vs判断分离、深度铺陈）
   - `assessment/`：评估/练习类（判断题、速判题、推理题、例题、练习梯度、必背锚）
   - `narrative/`：叙事结构类（情境钩子、贯穿案例、主角）
   - `language-learning/`：语言学习特化（词汇分层）
 
 ## 注意力引导（按教学目标提示优先看哪些卡）
 
-根据 Phase 3.1 识别的教学目标，提示 Agent 优先看：
-- **认证应试目标**（PMP/CPA/法考）→ 优先看 `assessment/judgment-card`、`assessment/quick-judgment`、`concept-anchoring/fact-vs-judgment`、`assessment/deterministic-anchor`、`structure/multi-source-arbitration`、`structure/foundation-chapter`、`structure/capstone-chapter`、`structure/appendix-compilation`
-- **技能掌握目标**（编程/数学/写作）→ 优先看 `assessment/worked-example`、`assessment/application-problem`、`concept-anchoring/socratic-questioning`
-- **概念理解目标**（哲学/经济学入门）→ 优先看 `concept-anchoring/precise-definition`、`concept-anchoring/misconception`、`narrative/character-protagonist`、`narrative/running-case`、`structure/recurring-leitmotif`
+根据设计期第 1 步识别的教学目标，提示 Agent 优先看：
+- **认证应试目标**（PMP/CPA/法考）→ 优先看 `assessment/judgment-card`、`assessment/quick-judgment`、`concept-anchoring/fact-vs-judgment`、`concept-anchoring/depth-elaboration`、`assessment/deterministic-anchor`、`structure/multi-source-arbitration`、`structure/foundation-chapter`、`structure/capstone-chapter`、`structure/appendix-compilation`
+- **技能掌握目标**（编程/数学/写作）→ 优先看 `assessment/worked-example`、`assessment/application-problem`、`concept-anchoring/socratic-questioning`、`concept-anchoring/depth-elaboration`
+- **概念理解目标**（哲学/经济学入门）→ 优先看 `concept-anchoring/precise-definition`、`concept-anchoring/misconception`、`concept-anchoring/depth-elaboration`、`narrative/character-protagonist`、`narrative/running-case`、`structure/recurring-leitmotif`
 - **语言学习目标**（英语/外语）→ 优先看 `language-learning/vocabulary-dimension`、`concept-anchoring/socratic-questioning`、`narrative/scenario-hook`
 
 这不是强制，是注意力引导——Agent 仍需遍历所有卡判断适用性。
@@ -33,19 +33,19 @@
 
 ## 模式选型流程三步
 
-1. **带问题翻卡**：带 Phase 3.1 识别的"教学问题"翻卡，每张卡判断"这张卡解决的问题本书有没有"
-2. **回答两个强制问题**（写进 style-spec §模式选型说明）：
+1. **带问题翻卡**：带设计期第 1 步识别的"教学问题"翻卡，每张卡判断"这张卡解决的问题本书有没有"
+2. **回答两个强制问题**（写进写作规范 §模式选型说明）：
    - 我考虑过哪些模式、拒绝了哪些、为什么拒绝？
    - 所选每个模式对应本书哪个具体教学问题？
 3. **或从预装配包出发再定制**（见下）
 
-审计时核对：声称用了某模式但 style-spec 板块语法里没有对应板块 = 失败。
+审计时核对：声称用了某模式但写作规范板块语法里没有对应板块 = 失败。
 
 ---
 
 ## 参考架构起点（预装配包）
 
-不想从 21 张原子卡拼装时，可以从这三个预装配包出发再定制。选用时在 style-spec 里说明"为什么这个起点适合本书、做了哪些定制"。
+不想从 21 张原子卡拼装时，可以从这三个预装配包出发再定制。选用时在写作规范里说明"为什么这个起点适合本书、做了哪些定制"。
 
 ### 认证应试蓝本
 **适合**：PMP/CPA/法考/医师资格等认证类
@@ -60,7 +60,7 @@
 ### AI 教学蓝本（K-12/技能）
 **适合**：英语教材/编程入门/数学
 **预打包**：socratic-questioning + precise-definition + worked-example + scenario-hook + vocabulary-dimension（语言类）+ cross-ref-trace
-**典型样本**：本 skill 的英语七上教材模板
+**典型样本**：英语七上教材样本
 
 ---
 

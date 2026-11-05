@@ -27,7 +27,7 @@ CPA Ch1 样本（见 CPA Ch1 chapter-01.md L34-38）：
 ```
 
 结构要点：
-- `### Common Misconception` 作为子标题（blueprint 可改中文"### 常见误区"，但要在 style-spec 统一）
+- `### Common Misconception` 作为子标题（blueprint 可改中文"### 常见误区"，但要在写作规范统一）
 - 一句加粗的口语化误区句起头（模仿考生真会说的话）
 - 拆解三段：先承认"为什么会这么想"、指出"错在哪"、给"正确姿势"
 

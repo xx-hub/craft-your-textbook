@@ -1,7 +1,9 @@
 # 两条路线决策指引
 
-> Phase 3.2 路线决策的依据和两路线差异详解。
+> 设计期路线决策的依据和两路线差异详解。
 > SKILL.md 只给一句话推荐，完整决策启发式和差异都在这里。
+> **路线 id 取 `blueprint` / `human`**（写进 `meta.route` 的机器取值）；`pure-blueprint` / `human-readable` 是产品/路线名，**不是 `meta.route` 的值**。
+> ⚠️ **但写作规范里那一行 `format:` 两套写法都认**（票 `skill-release-ready/09` 走查实测）：skill 侧的装配脚本 `merge_book.py` 把 `blueprint`／`pure-blueprint` 都归一成 blueprint、把 `human`／`human-readable` 都归一成 human-readable。推荐写这里的机器 id；写路线名也照常工作。
 
 ---
 
@@ -46,8 +48,10 @@ digraph route {
 | 过程不变量 | I7-I9（两条路线同等适用，见 invariants.md） | I7-I9 |
 | 正文形态 | 结构化、可含元指令块、技术回溯、yaml frontmatter、emoji 标题 | 流畅 prose，不内嵌元指令 |
 | 教学路线图位置 | 散布于各板块（💬引导方向/双脚本等） | 集中在章末教学区 |
-| 章级 frontmatter | 可选且常用（grep 校验用） | 默认无，META 显式声明 |
+| 章级 frontmatter | 可选且常用（grep 校验用） | 默认无，由写作规范显式声明 |
 | 典型样本 | 英语七上教材 | PMP 认证教材、CPA 审计教材 |
+
+> 表头两列用路线名；写进 `meta.route` 的机器 id 是 `blueprint` / `human`（见文首）。
 
 ---
 
@@ -63,7 +67,7 @@ digraph route {
 - 正文读起来像一本正常的书——段落过渡、叙事桥梁、人物/案例展开
 - 章末教学区是独立板块（markdown 二级标题分隔），包含练习/讨论题/思考题
 - 技术回溯改为可读的交叉引用（"正如第 2 章讨论过的……"而非行内标签）
-- Loader 指令（merge_book.py 自动注入 BOOK.md 顶部，可在脚本 LOADER_TEMPLATE 中定制措辞）：
+- Loader 指令（合并时由**装配脚本**自动注入成品书顶部——skill 侧是 `merge_book.py` 的 `LOADER_TEMPLATE`，本仓无脚本、由成品书的 `<!-- loader:begin -->` 区承载——可在那一处定制措辞）：
 
 ```
 > **AI 老师使用说明**：本书是给人读的流畅教材。正文 prose 是素材库，用你自己的话重组教学；
@@ -74,7 +78,7 @@ digraph route {
 
 ## 四、终检项目差异
 
-Phase 6 终检：
+交付前终检：
 - **pure-blueprint**：检查必含板块计数、提问路线图齐备、yaml frontmatter 合法、无脚手架残留
 - **human-readable**：检查章末教学区齐备、正文 prose 无内嵌元指令残留、loader 指令注入、无脚手架残留
 

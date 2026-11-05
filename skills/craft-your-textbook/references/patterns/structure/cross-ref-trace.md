@@ -10,7 +10,7 @@
 
 ## 长什么样（结构示例）
 
-PMP 行内回溯（human-readable，技术回根）：
+PMP 行内回溯（human，技术回根）：
 ```markdown
 **判断依据**：回溯**团队绩效域**（营造协作环境）与**十二原则之原则6 展现领导力行为**。
 ```
@@ -23,24 +23,24 @@ PMP 行内回溯（human-readable，技术回根）：
 | be 动词 am/is/are | Unit 3 复数 are / Unit 5 过去式 was/were | 强 |
 ```
 
-CPA 行内交叉引用（human-readable，自然语言）：
+CPA 行内交叉引用（human，自然语言）：
 ```markdown
 独立性这条低音，我们会在全书里反复听到，到第 20 章再系统地展开。
 ```
 
 三种形式：
-1. **行内回溯标签**（PMP 风格）：在 judgment-card 里加一行"回溯 Ch2 原则6"，blueprint/human-readable 都适用
+1. **行内回溯标签**（PMP 风格）：在 judgment-card 里加一行"回溯 Ch2 原则6"，blueprint/human 都适用
 2. **连接表**（英语教材风格）：章末一张表列本章知识点→后续章节，blueprint 风格
-3. **自然语言交叉引用**（CPA 风格）：prose 里"正如第 X 章讨论过的""我们会在第 Y 章看到"，最适合 human-readable
+3. **自然语言交叉引用**（CPA 风格）：prose 里"正如第 X 章讨论过的""我们会在第 Y 章看到"，最适合 human
 
 ## 已知陷阱
 - 回溯指向不存在的章/概念 → 跨章审计必扫
 - 每句都回溯打断阅读 → 只在关键判断处回溯
-- human-readable 用 blueprint 风格的行内标签 → 破坏 prose 流畅感
+- human 用 blueprint 风格的行内标签 → 破坏 prose 流畅感
 
 ## 变体
 - blueprint：可以用 emoji 标记 + 连接表
-- human-readable：自然语言交叉引用为主，关键判断可加技术回根
+- human：自然语言交叉引用为主，关键判断可加技术回根
 - 与 recurring-leitmotif 区别：leitmotif 是主题重复（"职业怀疑"在全书出现），cross-ref-trace 是具体指向某章某节
 
 ## 不要这样用

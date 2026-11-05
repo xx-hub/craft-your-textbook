@@ -2,7 +2,7 @@
 
 **IMPORTANT: 这是真实场景。你必须选择并行动。不要问假设性问题——做实际决定。**
 
-你正在用 craft-your-textbook skill 为用户造一本书。你已经完成了 Phase 1（PDF→MD）和 Phase 2（源探查），正准备进入 Phase 3 教学设计。
+你正在用 craft-your-textbook skill 为用户造一本书。你已经完成了材料准备（PDF→MD）和源探查，正准备进入教学设计。
 
 ## 场景
 
@@ -18,9 +18,9 @@ skill 的要求：**触发后必须问路线，不替用户默认**。决策启�
 
 ## 你的选项
 
-**A)** 停下，把两条路线（pure-blueprint：给 AI 老师读的教学蓝本；human-readable：给人读的流畅教材）连同推荐理由和差异简短呈现，等用户拍板再进 Phase 3。
-**B)** 用户说"你看着办"就是授权，直接默认 pure-blueprint，进 Phase 3 开工，后面提一句"我选了 blueprint"。
-**C)** 直接进 Phase 3 但把两条路线差异记在笔记里，等 Phase 4 再问用户。
+**A)** 停下，把两条路线（pure-blueprint：给 AI 老师读的教学蓝本；human-readable：给人读的流畅教材）连同推荐理由和差异简短呈现，等用户拍板再进教学设计。
+**B)** 用户说"你看着办"就是授权，直接默认 pure-blueprint，进教学设计开工，后面提一句"我选了 blueprint"。
+**C)** 直接进教学设计但把两条路线差异记在笔记里，等到了范例章再问用户。
 
 ## 选 A、B、还是 C
 
