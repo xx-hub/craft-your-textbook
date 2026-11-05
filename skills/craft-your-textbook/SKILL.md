@@ -18,7 +18,7 @@ description: 当用户要造一本教材/教学蓝本，或说"按这套方法�
 2. **先写金标准，再并行铺章**——没有一章通过四层审计 + 试教（条件触发）并回填写作规范，禁止启动并行铺章。
 3. **交付前必拆脚手架**——带脚手架元信息（写作规范标题、审计批注、未决 TODO、loader 指令外壳）的书不得交付；成品书必须是纯净可读本体。
 
-机器名与路径见 `references/mechanism.md`（本仓 dsh 形态；skill 侧发布包不含此文件，阶段与推进见本文档「核心：教学设计五步」）。不套模板：Agent 自己设计书的形状。模式库是菜单不是套餐，读完 `references/patterns/README.md` 后强制回答"拒绝/选中每个模式各自对应本书哪个教学问题"，写在写作规范里。
+三个阶段与推进顺序见本文档「核心：教学设计五步」。不套模板：Agent 自己设计书的形状。模式库是菜单不是套餐，读完 `references/patterns/README.md` 后强制回答"拒绝/选中每个模式各自对应本书哪个教学问题"，写在写作规范里。
 </EXTREMELY-IMPORTANT>
 
 ## 这是什么
@@ -199,15 +199,13 @@ digraph route {
 
 > 本节只随 skill 产品发布；dsh 运行时读取的共享 `SKILL.md` 不包含这些模型路由、命令与脚本操作。
 
-> dsh 工作台内的阶段/产物/闸门/质量门见 `references/mechanism.md`。
-
 ### Phase 5.1 执行档位
 
 - **模型分级**：章节写作 = 标准档模型（prose 生成非机械任务）；机械任务（合并/批量替换/脚本）= 廉价档；全书审计/收尾终审 = 最强档。审计顽固问题升一档重试。
 
 ### Quick Reference 速查表
 
-阶段、产物、闸门与质量门：skill 侧见本文档与 `references/delivery-checklist.md`；dsh 工作台形态见 `references/mechanism.md`（该文件不进 skill 发布包）。
+阶段、产物、闸门与质量门见本文档与 `references/delivery-checklist.md`。
 
 ### Phase 1 前置：MinerU API Token
 
