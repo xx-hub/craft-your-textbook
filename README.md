@@ -59,7 +59,7 @@ ln -s "$(pwd)/craft-your-textbook/skills/craft-your-textbook" <你的 AI 助手�
 
 **下载压缩包也行**：在仓库页面点 `Code → Download ZIP`，解压后把 `skills/craft-your-textbook/` 整个文件夹放进技能目录。
 
-> 验证情况（2026-11-04）：拷目录的三条命令、自查、项目级与软链接两段，都按组装好的产物跑通了；**真网址 clone 与 ZIP 两条没验过**（前者只验了地址可达，后者要图形界面）。逐条记录见随包那份维护规约（skill-maintenance.md）的「发布前实测台账」一节。
+> 验证情况（2026-11-04）：拷目录的三条命令、自查、项目级与软链接两段，都按组装好的产物跑通了；**真网址 clone 与 ZIP 两条没验过**（前者只验了地址可达，后者要图形界面）。逐条记录见开发仓里的维护规约（skill-maintenance.md，不随包发布）的「发布前实测台账」一节。
 
 **② 插件市场——只有 Claude Code 支持这条**（在它里面直接敲）：
 
@@ -196,4 +196,4 @@ AI 第一次让另一种范式成为可能，因为它提供了三件过去买�
 
 ---
 
-这套方法在发布包里带了 8 个自测场景，给维护它的人跑回归用，造书时用不到：`pressure-route`、`pressure-golden`、`pressure-audit`、`pressure-spiral`、`pressure-scaffold`、`pressure-backfill`、`pressure-depth`、`pressure-thin`（跑法与记录在发布包的 `tests/` 里）。
+发布包只带造书要用的东西；维护本 skill 的规约与 8 个自测场景（`pressure-*`）留在开发仓 `skill/` 下，不随包发布。

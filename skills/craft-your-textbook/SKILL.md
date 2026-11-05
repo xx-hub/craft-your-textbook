@@ -184,7 +184,6 @@ digraph route {
 | 审计派单模板（章级 L1-L3 与范例章两份模板的出处；复制后机械替换占位符，不许临场编 prompt） | `references/auditor-prompt-template.md` |
 | 交付 | `references/delivery-checklist.md` |
 | 避坑 | `references/anti-patterns.md` |
-| 维护本 skill 自身（改纪律前的 RED-GREEN-REFACTOR 规矩与跑测控制；本仓＝仓根 skill/ 目录下的同名源文件，组装时才拷进 `references/`） | `references/skill-maintenance.md` |
 | 设计期 模式卡 · 概念锚定类（五张，逐张判断「这个问题本书有没有」） | `references/patterns/concept-anchoring/precise-definition.md`、`references/patterns/concept-anchoring/misconception.md`、`references/patterns/concept-anchoring/socratic-questioning.md`、`references/patterns/concept-anchoring/fact-vs-judgment.md`、`references/patterns/concept-anchoring/depth-elaboration.md` |
 | 设计期 模式卡 · 评估/练习类（六张） | `references/patterns/assessment/judgment-card.md`、`references/patterns/assessment/quick-judgment.md`、`references/patterns/assessment/application-problem.md`、`references/patterns/assessment/worked-example.md`、`references/patterns/assessment/practice-gradient.md`、`references/patterns/assessment/deterministic-anchor.md` |
 | 设计期 模式卡 · 叙事结构类（三张） | `references/patterns/narrative/scenario-hook.md`、`references/patterns/narrative/running-case.md`、`references/patterns/narrative/character-protagonist.md` |
