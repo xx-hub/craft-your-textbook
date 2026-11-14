@@ -12,6 +12,7 @@
 | Phase 5.4 · 整本合并 | `python scripts/merge_book.py .` | 把 `chapters/` ＋ `appendix/` 合并成 `BOOK.md`（human-readable 路线注入 loader 指令）；`chapters/shards/` 是分片原料、**不当章收**。`META.md` 的 `format:` 两个**机器 id**（`blueprint`／`human`）与两个**路线名**（`pure-blueprint`／`human-readable`）都认。⚠️ **合并前先核「章正文＝当前分片的重拼结果」**：某章有分片而章正文与重拼结果不一致（或章正文不在）⇒ 非零退出、点名第 N 章、**一个字节都不写**，要你先跑 `assemble_chapter.py` 重拼（票 `skill-release-ready/14`） |
 | Phase 6 · 拆脚手架 | `python scripts/strip_meta_sections.py chapters/ appendix/` | 按写作规范里的脚手架标题列表，拆掉**分片末尾**的过程元数据板块；拼好的章正文是派生件，有分片时跳过（见下）。⚠️ **必须先 `cd` 到项目根**——它把项目根钉死成 `.`（另两个脚本收项目根参数），从别处跑会读不到 `META.md`、0 删除、exit 0 |
 | Phase 6 · 重拼 | `python scripts/assemble_chapter.py .` | 拆完脚手架把章正文重新拼一遍（分片变了，派生件要跟着变） |
+| 交付前 | `python scripts/check_book.py .` | **只读**交付检查（检查项以 `--help`／`--json` 的输出为准，文档不抄第二份）；`--json` 给机器读，有红项**或有未查项**都退出码 1（未查不等于查过干净），缺 `BOOK.md` 退出码 2；未查项确认确实不适用时加 `--allow-unchecked` 显式放行（**只放行未查，不放行红**）。⛔ 它只报告、不删不改；拆脚手架仍走 `strip_meta_sections.py` |
 | 任意 | `python <脚本> --help` | 只印用法、**一个字节都不写**（`merge_book.py --help` 原先会把已有的 `BOOK.md` 清成 0 字节、退出码还是 0） |
 
 ## 脚手架标题写在哪、怎么写（两处文档原先各说各的，票 09 走查实测）
@@ -67,4 +68,4 @@
 ## 依赖
 
 `pip install -r scripts/requirements.txt`（只有 `/01_pdf_to_md.py` 用到 `requests`；
-拼章、合并、拆脚手架三件只用 Python 标准库）。
+拼章、合并、拆脚手架与交付检查 `check_book.py` 只用 Python 标准库）。
