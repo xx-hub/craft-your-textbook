@@ -1,6 +1,6 @@
 {
   "name": "craft-your-textbook",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "把教材或某领域知识，加工成 AI 苏格拉底老师能拿去上课的教学蓝本（pure-blueprint），或一本给人读的流畅教材（human-readable，AI 也能直接教）。两条路线触发时自选，默认推荐给 AI 老师的版本。适用任何学科。有教师用书可直接针对应试。",
   "author": {
     "name": "xx-hub"

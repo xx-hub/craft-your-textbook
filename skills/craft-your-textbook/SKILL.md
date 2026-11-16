@@ -230,9 +230,10 @@ digraph route {
 
 ### Phase 1 前置：MinerU API Token
 
-PDF→Markdown 默认走 MinerU 在线 API（`mineru.net`）。开跑前让用户完成：
+PDF→Markdown 默认走 MinerU 在线 API（`mineru.net`）。**用户只需要给一个 Token**；
+定位脚本、装依赖、建目录、跑转换，都是你自己做完再回话，别把这些派回给用户。开跑前依次做：
 
-0. 定位 skill 脚本目录 + 装依赖：
+0. 定位 skill 脚本目录 + 装依赖（用户不必知道这一步存在）：
 
    ```bash
    # 依次在用户级、项目级目录查找 skill 位置，取第一个命中
@@ -253,8 +254,11 @@ PDF→Markdown 默认走 MinerU 在线 API（`mineru.net`）。开跑前让用�
    mkdir -p <项目根>/scripts
    cp "$SKILL_DIR/scripts/"*.py <项目根>/scripts/
    ```
-1. 打开 <https://mineru.net> 注册申请 API Token
-2. 设环境变量：`export MINERU_TOKEN="你的token"`
-3. 运行 `python <项目根>/scripts/01_pdf_to_md.py <PDF路径> 材料/转换稿/`
+1. 向用户要一次 Token（这是用户唯一要出手的事）：说明去 <https://mineru.net> 注册、申请 API Token，
+   免费额度够造一本书；拿到后贴在对话里即可，也可以由用户设成环境变量
+2. 拿到 Token 后由你设进环境：`export MINERU_TOKEN="你的token"`（用户在对话里给的原话就够，
+   不必让他自己敲；要写进 shell 配置先问一句）
+3. 运行 `python <项目根>/scripts/01_pdf_to_md.py <PDF路径> 材料/转换稿/`——依赖缺了就按第 0 步装完再跑，
+   卡住（PEP 668、缺 venv、网络、额度）先自己处置，处置不了再把**具体那一步**和报错原文交给用户
 
 理科改 `ENABLE_FORMULA = True`。已有 MD 跳过 Phase 1。
